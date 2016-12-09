@@ -1,0 +1,15 @@
+{
+  "name": "threejs-simple-boilerplate",
+  "version": "1.0.0",
+  "description": "A zeroconf boilerplate for three.js.  No batteries included.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server --serveStatic src --files src --directory"
+  },
+  "author": "mwcz <mwc@clayto.com>",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "browser-sync": "^2.18.2"
+  }
+}
