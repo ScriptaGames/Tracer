@@ -12,9 +12,11 @@ Game.prototype.states.play = function (game) {
     game.scene.add(this.trail.mesh);
 
     // Add the coins
-    for (var i = 1; i < 11; i++) {
+    for (var i = 1; i < 100; i++) {
         var coin = new game.Coin(game);
-        coin.mesh.position.y += (i * 30);
+        coin.mesh.position.x = _.random(1, 1000);
+        coin.mesh.position.y = _.random(1, 1000);
+        coin.mesh.position.z = _.random(1, 1000);
         this.meshes.push(coin.mesh);
         game.scene.add(coin.mesh);
     }
