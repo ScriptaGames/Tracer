@@ -19,6 +19,12 @@ Game.prototype.states.play = function (game) {
         game.scene.add(coin.mesh);
     }
 
+    // Add a point light in the middle of the room
+    this.light = new THREE.PointLight(new THREE.Color(THREE.ColorKeywords.white), 1, 2000);
+    game.scene.add(this.light);
+
+    //
+
     game.createControls(this.playerPosition.position);
 
 };
@@ -26,8 +32,10 @@ Game.prototype.states.play = function (game) {
 Game.prototype.states.play.prototype.update = function (game) {
     // update player position based on controls
     this.playerVelocity.add(game.controls.velocityRequest.clone().multiplyScalar(1));
-
     this.playerPosition.position.add(this.playerVelocity);
+
+    // move light
+    this.light.position.copy(this.playerPosition.position);
 
     // advance trail to player position
     this.trail.meshLine.advance(this.playerPosition.position);

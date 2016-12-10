@@ -30,14 +30,18 @@ Game.prototype.states.title = function (game) {
     wallTexture.wrapS = wallTexture.wrapT = THREE.MirroredRepeatWrapping;
     wallTexture.repeat.set(6, 6);
 
-    var wallMaterial = new THREE.MeshBasicMaterial( { map: wallTexture, side: THREE.DoubleSide } );
+    var wallMaterial = new THREE.MeshPhongMaterial({
+        map: wallTexture,
+        side: THREE.DoubleSide,
+        shininess: 11,
+    });
     var materials = [
         wallMaterial,
         wallMaterial,
         wallMaterial,
         wallMaterial,
-        new THREE.MeshBasicMaterial( { map: ceilingTexture, side: THREE.DoubleSide } ),
-        new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } )
+        new THREE.MeshPhongMaterial( { map: ceilingTexture, side: THREE.DoubleSide } ),
+        new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide } )
     ];
     var faceMaterial = new THREE.MeshFaceMaterial( materials );
 
@@ -45,6 +49,13 @@ Game.prototype.states.title = function (game) {
     var boxMesh = new THREE.Mesh( geometry, faceMaterial );
 
     game.scene.add(boxMesh);
+
+    // add ambient light
+
+    var ambientLight = new THREE.AmbientLight(0x404040);
+    game.scene.add(ambientLight);
+
+    //
 
     this.btn = document.createElement('button');
     this.btn.innerHTML = 'Play';
