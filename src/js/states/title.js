@@ -26,7 +26,7 @@ Game.prototype.states.title = function (game) {
     var texture0 = textureLoader.load( '../textures/wall1.png' );
     var texture1 = textureLoader.load( '../textures/wall2.png' );
     var texture2 = textureLoader.load( '../textures/ceiling.png' );
-    var texture3 = textureLoader.load( '../textures/floor.png' );
+    var texture3 = textureLoader.load( '../textures/floor.jpg' );
     var texture4 = textureLoader.load( '../textures/wall3.png' );
     var texture5 = textureLoader.load( '../textures/wall4.png' );
 
