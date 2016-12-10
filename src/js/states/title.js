@@ -19,6 +19,14 @@ Game.prototype.states.title = function (game) {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
 
     game.scene.add(this.mesh);
+
+    this.btn = document.createElement('button');
+    this.btn.innerHTML = 'Play';
+    this.btn.classList.add('play');
+    this.btn.addEventListener('click', function () {
+        game.setState('play');
+    });
+    document.body.appendChild(this.btn);
 };
 
 Game.prototype.states.title.prototype.update = function (game) {
@@ -29,4 +37,7 @@ Game.prototype.states.title.prototype.destroy = function (game) {
     console.log('[title.js] destroying title state');
 
     game.removeMesh(this.mesh);
+
+
+    document.body.removeChild(this.btn);
 };

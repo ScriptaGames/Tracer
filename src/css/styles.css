@@ -3,4 +3,9 @@ html, body {
     padding: 0;
     overflow: hidden;
 }
-
+.play {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
