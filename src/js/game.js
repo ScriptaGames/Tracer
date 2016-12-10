@@ -16,6 +16,10 @@ var Game = function () {
     // somewhere to store 3D fonts
     this.fonts = {};
 
+    // create some fake controls that do nothing, real controls are created by each state
+    this.noopControls = { update: _.noop };
+    this.controls = this.noopControls;
+
     // start update loop
     requestAnimationFrame(this.update.bind(this));
 };
@@ -70,9 +74,6 @@ Game.prototype.createScene = function () {
     // set renderer size
     this.updateViewportSize();
     window.addEventListener('resize', this.updateViewportSize.bind(this));
-
-    // init controls
-    this.createControls();
 };
 
 Game.prototype.updateViewportSize = function () {

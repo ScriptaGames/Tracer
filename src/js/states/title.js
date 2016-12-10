@@ -38,6 +38,5 @@ Game.prototype.states.title.prototype.destroy = function (game) {
 
     game.removeMesh(this.mesh);
 
-
     document.body.removeChild(this.btn);
 };
