@@ -40,7 +40,7 @@ Game.prototype.states.title = function (game) {
     ];
     var faceMaterial = new THREE.MeshFaceMaterial( materials );
 
-    var geometry = new THREE.BoxGeometry( 1200, 1200, 1200 );
+    var geometry = new THREE.BoxGeometry( 1600, 1600, 1600 );
     var boxMesh = new THREE.Mesh( geometry, faceMaterial );
 
     game.scene.add(boxMesh);
