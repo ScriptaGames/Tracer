@@ -57,7 +57,7 @@ Game.prototype.setState = function (stateName) {
 Game.prototype.createScene = function () {
     console.log('[game.js] creating scene');
 
-    this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000);
+    this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
     this.camera.position.z = 400;
 
     this.container = document.querySelector('.game-container');
