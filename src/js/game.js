@@ -13,7 +13,8 @@ var Game = function () {
     // create empty 3d scene (also renderer & camera)
     this.createScene();
 
-    // somewhere to store 3D fonts
+    // some objects to store preloaded assets
+    this.textures = {};
     this.fonts = {};
 
     // create some fake controls that do nothing, real controls are created by each state
@@ -97,6 +98,10 @@ Game.prototype.removeMesh = function (mesh) {
         mesh.material.dispose();
     }
 
+};
+
+Game.prototype.registerTexture = function (name, texture) {
+    this.textures[name] = texture;
 };
 
 Game.prototype.registerFont = function (name, font) {

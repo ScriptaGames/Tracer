@@ -4,14 +4,17 @@ Game.prototype.Trail = function (game) {
 
     // Create the line material
     this.material = new THREE.MeshLineMaterial( {
-        color: new THREE.Color( "rgb(255, 2, 2)" ),
-        opacity: 1,
+        // color: new THREE.Color( "rgb(255, 255, 255)" ),
+        opacity: 0.9,
+        useMap: true,
+        map: game.textures.trailStroke,
         resolution: new THREE.Vector2( window.innerWidth, window.innerHeight ),
         sizeAttenuation: 1,
         lineWidth: 2.3,
         near: game.camera.near,
         far: game.camera.far,
         depthTest: true,
+        depthWrite: true,
         blending: THREE.AdditiveBlending,
         transparent: false,
         side: THREE.DoubleSide,

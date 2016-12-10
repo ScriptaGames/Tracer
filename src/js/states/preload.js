@@ -6,7 +6,12 @@ Game.prototype.states.preload = function (game) {
     this.pending = 0;
 
     this.fontLoader = new THREE.FontLoader();
+    this.textureLoader = new THREE.TextureLoader();
 
+    this.preloadTexture('textures/stroke.png', 'trailStroke');
+    this.preloadTexture('textures/wall.jpg', 'wallTexture');
+    this.preloadTexture('textures/ceiling.png', 'ceilingTexture');
+    this.preloadTexture('textures/floor.jpg', 'floorTexture');
     this.preloadFont('fonts/helvetiker_regular.typeface.json', 'titleFont');
 
     this.checkPending();
@@ -23,8 +28,16 @@ Game.prototype.states.preload.prototype.destroy = function (game) {
 
 Game.prototype.states.preload.prototype.preloadFont = function (fontFile, fontName) {
     this.addPending();
-    this.fontLoader.load('fonts/helvetiker_regular.typeface.json', function (font) {
+    this.fontLoader.load(fontFile, function (font) {
         this.game.registerFont(fontName, font);
+        this.resolvePending();
+    }.bind(this));
+};
+
+Game.prototype.states.preload.prototype.preloadTexture = function (textureFile, textureName) {
+    this.addPending();
+    this.textureLoader.load(textureFile, function (texture) {
+        this.game.registerTexture(textureName, texture);
         this.resolvePending();
     }.bind(this));
 };

@@ -23,15 +23,11 @@ Game.prototype.states.title = function (game) {
     // Add the room cube
     var textureLoader = new THREE.TextureLoader();
 
-    var wallTexture = textureLoader.load( '../textures/wall.jpg' );
-    var ceilingTexture = textureLoader.load( '../textures/ceiling.png' );
-    var floorTexture = textureLoader.load( '../textures/floor.jpg' );
-
-    wallTexture.wrapS = wallTexture.wrapT = THREE.MirroredRepeatWrapping;
-    wallTexture.repeat.set(6, 6);
+    game.textures.wallTexture.wrapS = game.textures.wallTexture.wrapT = THREE.MirroredRepeatWrapping;
+    game.textures.wallTexture.repeat.set(6, 6);
 
     var wallMaterial = new THREE.MeshPhongMaterial({
-        map: wallTexture,
+        map: game.textures.wallTexture,
         side: THREE.DoubleSide,
         shininess: 11,
     });
@@ -40,8 +36,8 @@ Game.prototype.states.title = function (game) {
         wallMaterial,
         wallMaterial,
         wallMaterial,
-        new THREE.MeshPhongMaterial( { map: ceilingTexture, side: THREE.DoubleSide } ),
-        new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide } )
+        new THREE.MeshPhongMaterial( { map: game.textures.ceilingTexture, side: THREE.DoubleSide } ),
+        new THREE.MeshPhongMaterial( { map: game.textures.floorTexture, side: THREE.DoubleSide } )
     ];
     var faceMaterial = new THREE.MeshFaceMaterial( materials );
 
