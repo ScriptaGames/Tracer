@@ -20,6 +20,31 @@ Game.prototype.states.title = function (game) {
 
     game.scene.add(this.mesh);
 
+    // Add the room cube
+    var textureLoader = new THREE.TextureLoader();
+
+    var texture0 = textureLoader.load( '../textures/wall1.png' );
+    var texture1 = textureLoader.load( '../textures/wall2.png' );
+    var texture2 = textureLoader.load( '../textures/ceiling.png' );
+    var texture3 = textureLoader.load( '../textures/floor.png' );
+    var texture4 = textureLoader.load( '../textures/wall3.png' );
+    var texture5 = textureLoader.load( '../textures/wall4.png' );
+
+    var materials = [
+        new THREE.MeshBasicMaterial( { map: texture0, side: THREE.DoubleSide } ),
+        new THREE.MeshBasicMaterial( { map: texture1, side: THREE.DoubleSide } ),
+        new THREE.MeshBasicMaterial( { map: texture2, side: THREE.DoubleSide } ),
+        new THREE.MeshBasicMaterial( { map: texture3, side: THREE.DoubleSide } ),
+        new THREE.MeshBasicMaterial( { map: texture4, side: THREE.DoubleSide } ),
+        new THREE.MeshBasicMaterial( { map: texture5, side: THREE.DoubleSide } )
+    ];
+    var faceMaterial = new THREE.MeshFaceMaterial( materials );
+
+    var geometry = new THREE.BoxGeometry( 1200, 1200, 1200 );
+    var boxMesh = new THREE.Mesh( geometry, faceMaterial );
+
+    game.scene.add(boxMesh);
+
     this.btn = document.createElement('button');
     this.btn.innerHTML = 'Play';
     this.btn.classList.add('play');
