@@ -3,6 +3,7 @@ Game.prototype.states.play = function (game) {
     console.log('[play.js] creating play state');
 
     this.meshes = [];
+    this.coins = [];
 
     this.playerPosition = new THREE.Object3D();
     this.playerVelocity = new THREE.Vector3();
@@ -14,11 +15,13 @@ Game.prototype.states.play = function (game) {
     // Add the coins
     for (var i = 1; i < 100; i++) {
         var coin = new game.Coin(game);
-        coin.mesh.position.x = _.random(1, 1000);
-        coin.mesh.position.y = _.random(1, 1000);
-        coin.mesh.position.z = _.random(1, 1000);
+        coin.mesh.position.x = _.random(-500, 500);
+        coin.mesh.position.y = _.random(-500, 500);
+        coin.mesh.position.z = _.random(-500, 500);
         this.meshes.push(coin.mesh);
         game.scene.add(coin.mesh);
+
+        this.coins.push(coin);
     }
 
     // Add a point light in the middle of the room
