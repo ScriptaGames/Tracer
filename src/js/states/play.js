@@ -21,6 +21,10 @@ Game.prototype.states.play = function (game) {
         this.meshes.push(coin.mesh);
         game.scene.add(coin.mesh);
 
+        if (this.meshes[i-1]) {
+            coin.mesh.lookAt(this.meshes[i-1].position);
+        }
+
         this.coins.push(coin);
     }
 
