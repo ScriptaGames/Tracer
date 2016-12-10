@@ -4,6 +4,10 @@ Game.prototype.states.play = function (game) {
 
     this.meshes = [];
 
+    this.trail = new game.Trail(game);
+    this.meshes.push(this.trail.mesh);
+    game.scene.add(this.trail.mesh);
+
     game.createControls();
 };
 
