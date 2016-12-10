@@ -8,7 +8,7 @@ Game.prototype.Trail = function (game) {
         opacity: 1,
         resolution: new THREE.Vector2( window.innerWidth, window.innerHeight ),
         sizeAttenuation: 1,
-        lineWidth: 0.3,
+        lineWidth: 2.3,
         near: game.camera.near,
         far: game.camera.far,
         depthTest: true,
@@ -26,6 +26,7 @@ Game.prototype.Trail = function (game) {
     }
 
     this.meshLine = new THREE.MeshLine();
-    this.meshLine.setGeometry(this.trail_geometry, function (p) { return p; });
+    this.meshLine.setGeometry(this.trail_geometry, function lineWidth(p) { return 1; });
     this.mesh = new THREE.Mesh(this.meshLine.geometry, this.material);
+    this.mesh.frustumCulled = false;
 };

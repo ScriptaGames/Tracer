@@ -346,6 +346,12 @@ THREE.TrackballControls = function ( object, domElement ) {
 
         _this.object.lookAt( _this.target );
 
+        _this.velocityRequest.copy( _this.target );
+        _this.velocityRequest.sub( _this.object.position );
+        // _this.velocityRequest.multiplyScalar( -1 );
+        _this.velocityRequest.normalize();
+        // velocity.multiplyScalar( this.getSpeed() );
+
         if ( lastPosition.distanceToSquared( _this.object.position ) > EPS ) {
 
             _this.dispatchEvent( changeEvent );
