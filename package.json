@@ -1,5 +1,5 @@
 {
-  "name": "threejs-simple-boilerplate",
+  "name": "tracer-game",
   "version": "1.0.0",
   "description": "A zeroconf boilerplate for three.js.  No batteries included.",
   "main": "index.js",

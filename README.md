@@ -1,11 +1,9 @@
-# threejs-simple-boilerplate
+# Tracer
 
-A nearly featureless boilerplate project for building threejs demos/games/apps.
+A game for Ludum Dare 37.
 
 ## Setup
 
-    git clone git@github.com:mwcz/threejs-simple-typescript.git
-    cd threejs-simple-typescript
     npm install
 
 ## Development commands
