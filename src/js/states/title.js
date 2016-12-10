@@ -3,7 +3,7 @@ Game.prototype.states.title = function (game) {
     console.log('[title.js] creating title state');
 
     this.geometry = new THREE.TextGeometry(
-        'Title Screen',
+        'Tracer',
         {
             size: 40,
             height: 9,
@@ -11,7 +11,7 @@ Game.prototype.states.title = function (game) {
             font : game.fonts.titleFont,
             bevelEnabled : true,
             bevelThickness : 2,
-            bevelSize : 5.5
+            bevelSize : 1.5
         }
     );
     this.geometry.center();
