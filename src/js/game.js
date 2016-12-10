@@ -28,6 +28,9 @@ Game.prototype.update = function () {
     this.clockDelta = this.clock.getDelta();
     this.lagScale = lerp(this.lagScale, this.clockDelta / .01666666666, 0.9);
 
+    // update the control system
+    this.controls.update( this.clockDelta );
+
     // run the update function for whatever state is active
     this.state.update(this);
 
@@ -67,6 +70,9 @@ Game.prototype.createScene = function () {
     // set renderer size
     this.updateViewportSize();
     window.addEventListener('resize', this.updateViewportSize.bind(this));
+
+    // init controls
+    this.createControls();
 };
 
 Game.prototype.updateViewportSize = function () {

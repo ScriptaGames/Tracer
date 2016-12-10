@@ -30,7 +30,7 @@ Game.prototype.states.title = function (game) {
 };
 
 Game.prototype.states.title.prototype.update = function (game) {
-    this.mesh.rotation.y += 0.005;
+    // this.mesh.rotation.y += 0.005;
 };
 
 Game.prototype.states.title.prototype.destroy = function (game) {
