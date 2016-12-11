@@ -10,18 +10,14 @@ Game.prototype.Coin = function (game) {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.captured = false;
 
-    this.handleCollision = function coinHandleCollision(playerPosition) {
-
-    };
-
     this.update = function coinUpdate() {
         if (this.mesh.captured) {
             // the coin has been captured start animating the shrinkage
             var curScale = this.mesh.scale.x;
-            if (curScale > 0) {
+            if (curScale > 0.01) {
                 var newScale = curScale - 0.1;
-                if (newScale < 0) {
-                    newScale = 0;
+                if (newScale <= 0) {
+                    newScale = 0.01;
                 }
                 this.mesh.scale.set(newScale, newScale, newScale);
             }

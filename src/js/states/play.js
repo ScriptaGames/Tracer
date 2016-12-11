@@ -32,9 +32,10 @@ Game.prototype.states.play = function (game) {
     this.light = new THREE.PointLight(new THREE.Color(THREE.ColorKeywords.white), 1, 2000);
     game.scene.add(this.light);
 
-    //
-
     game.createControls(this.playerPosition.position);
+
+
+    this.initParticles();
 
 };
 
@@ -53,14 +54,17 @@ Game.prototype.states.play.prototype.update = function (game) {
         // advance trail to player position
         this.trail.meshLine.advance(this.playerPosition.position);
 
-        // check for coin collisions
-        this.checkCoinCollisions();
-
-        // update the coins
-        this.updateCoins();
 
         this.playerVelocity.set(0, 0, 0);
     }
+
+    // check for coin collisions
+    this.checkCoinCollisions();
+
+    // update the coins
+    this.updateCoins();
+
+    this.particleGroup.tick( game.clockDelta );
 };
 
 Game.prototype.states.play.prototype.updateCoins = function playUpdateCoins() {
@@ -98,7 +102,15 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
     var collisionResults = ray.intersectObjects( this.coinMeshes );
     if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
         var cmesh = collisionResults[0].object;
-        cmesh.captured = true;
+
+        if (!cmesh.captured) {
+            cmesh.captured = true;
+            var position = cmesh.position.clone();
+
+            // trigger particle explosion
+            this.particleBurst( position );
+            console.log("Hit")
+        }
     }
 };
 
@@ -120,4 +132,55 @@ Game.prototype.states.play.prototype.placeCoins = function (game) {
         this.coins.push(coin);
         this.coinMeshes.push(coin.mesh);
     }
+};
+
+Game.prototype.states.play.prototype.initParticles = function playInitParticles() {
+
+    // Initialize the particles for coin capture
+    this.emitterSettings = {
+        type: SPE.distributions.SPHERE,
+        position: {
+            spread: new THREE.Vector3(10),
+            radius: 10,
+        },
+        velocity: {
+            value: new THREE.Vector3(75)
+        },
+        size: {
+            value: [10, 0]
+        },
+        opacity: {
+            value: [1, 0]
+        },
+        color: {
+            value: [new THREE.Color('purple'), new THREE.Color('white')],
+            spread: new THREE.Vector3(20)
+        },
+        particleCount: 50,
+        alive: true,
+        duration: 0.07,
+        maxAge: {
+            value: 0.6
+        }
+    };
+
+    this.particleGroup = new SPE.Group({
+        maxParticleCount: 500,
+        texture: {
+            value: new THREE.TextureLoader().load('textures/smokeparticle.png')
+        },
+        blending: THREE.AdditiveBlending
+    });
+
+    this.particleGroup.addPool( 5, this.emitterSettings, false );
+
+    this.particleGroup.mesh.frustumCulled = false;
+    this.particleGroup.mesh.renderOrder = -1;
+
+    // Add particle group to scene.
+    game.scene.add( this.particleGroup.mesh );
+};
+
+Game.prototype.states.play.prototype.particleBurst = function playParticleBurst(position) {
+    this.particleGroup.triggerPoolEmitter( 1, position );
 };
