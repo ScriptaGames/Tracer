@@ -15,7 +15,7 @@ Game.prototype.states.play = function (game) {
 
     // init player sphere
 
-    var sphereGeo = new THREE.SphereGeometry(1.0, 32, 32);
+    var sphereGeo = new THREE.SphereGeometry(1.0, 10, 10);
     var sphereMat = new THREE.MeshBasicMaterial({
         color: '#00cdfc',
     });
