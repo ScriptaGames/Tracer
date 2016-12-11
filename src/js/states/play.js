@@ -55,6 +55,8 @@ Game.prototype.states.play.prototype.update = function (game) {
 Game.prototype.states.play.prototype.destroy = function (game) {
     console.log('[play.js] destroying play state');
 
+    game.scene.remove(this.light);
+
     this.meshes.forEach(game.removeMesh.bind(game));
 
     game.removeControls();
