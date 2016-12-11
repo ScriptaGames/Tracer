@@ -18,8 +18,10 @@ var Game = function () {
     this.fonts = {};
 
     // create some fake controls that do nothing, real controls are created by each state
-    this.noopControls = { update: _.noop };
-    this.controls = this.noopControls;
+    this.controls = {
+        noopSteering : { update: _.noop },
+    };
+    this.controls.steering = this.controls.noopSteering;
 
     // start update loop
     requestAnimationFrame(this.update.bind(this));
@@ -34,7 +36,7 @@ Game.prototype.update = function () {
     this.lagScale = lerp(this.lagScale, this.clockDelta / .01666666666, 0.9);
 
     // update the control system
-    this.controls.update( this.clockDelta );
+    this.controls.steering.update( this.clockDelta );
 
     // run the update function for whatever state is active
     this.state.update(this);

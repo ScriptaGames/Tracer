@@ -39,17 +39,19 @@ Game.prototype.states.play = function (game) {
 };
 
 Game.prototype.states.play.prototype.update = function (game) {
-    // update player position based on controls
-    this.playerVelocity.add(game.controls.velocityRequest.clone().multiplyScalar(1));
-    this.playerPosition.position.add(this.playerVelocity);
+    if (!game.controls.actions.holdPosition) {
+        // update player position based on controls
+        this.playerVelocity.add(game.controls.steering.velocityRequest.clone().multiplyScalar(1));
+        this.playerPosition.position.add(this.playerVelocity);
 
-    // move light
-    this.light.position.copy(this.playerPosition.position);
+        // move light
+        this.light.position.copy(this.playerPosition.position);
 
-    // advance trail to player position
-    this.trail.meshLine.advance(this.playerPosition.position);
+        // advance trail to player position
+        this.trail.meshLine.advance(this.playerPosition.position);
 
-    this.playerVelocity.set(0, 0, 0);
+        this.playerVelocity.set(0, 0, 0);
+    }
 };
 
 Game.prototype.states.play.prototype.destroy = function (game) {
