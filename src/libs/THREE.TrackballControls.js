@@ -119,7 +119,7 @@ THREE.TrackballControls = function ( object, domElement ) {
 
     function slopewell( r ) {
         var STEERING_SLOPE = 10.;
-        var STEERING_WELL = 0.01;
+        var STEERING_WELL = 0.03;
         return Math.max(0, ( -STEERING_WELL + r ) / STEERING_SLOPE);
     }
 

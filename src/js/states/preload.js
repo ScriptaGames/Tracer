@@ -9,12 +9,17 @@ Game.prototype.states.preload = function (game) {
     this.textureLoader = new THREE.TextureLoader();
     this.jsonLoader = new THREE.JSONLoader();
 
-    this.preloadModelPoints('models/LeePerrySmith.json', 'LeePerrySmith');
+    this.preloadModelPoints('models/LeePerrySmith.json', 'LeePerrySmith', 5);
+    this.preloadModelPoints('models/cone.json', 'cone', 6);
+    this.preloadModelPoints('models/cube.json', 'cube', 6);
+    this.preloadModelPoints('models/football.json', 'football', 1);
+    this.preloadModelPoints('models/monkey.json', 'monkey', 1);
 
     this.preloadTexture('textures/stroke.png', 'trailStroke');
     this.preloadTexture('textures/wall.jpg', 'wallTexture');
     this.preloadTexture('textures/ceiling.png', 'ceilingTexture');
     this.preloadTexture('textures/floor.jpg', 'floorTexture');
+
     this.preloadFont('fonts/helvetiker_regular.typeface.json', 'titleFont');
 
     this.checkPending();
@@ -45,10 +50,13 @@ Game.prototype.states.preload.prototype.preloadTexture = function (textureFile, 
     }.bind(this));
 };
 
-Game.prototype.states.preload.prototype.preloadModelPoints = function (modelPointsFile, modelPointsName) {
+Game.prototype.states.preload.prototype.preloadModelPoints = function (modelPointsFile, modelPointsName, scale) {
     this.addPending();
     fetch(modelPointsFile).then(function (res) { return res.json(); }).then(function (modelPoints) {
         var typedArray = Float32Array.from(modelPoints);
+        for (var i = 0; i < typedArray.length; ++i) {
+            typedArray[i] *= scale;
+        }
         this.game.registerModelPoints(modelPointsName, typedArray);
         this.resolvePending();
     }.bind(this));

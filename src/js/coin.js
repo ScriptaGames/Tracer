@@ -2,13 +2,18 @@ Game.prototype.Coin = function (game) {
     this.game = game;
 
     // Create the line material
-    this.material = new THREE.MeshNormalMaterial();
+    this.material = new THREE.MeshNormalMaterial({
+        // transparent: true,
+        // opacity: 0.4,
+    });
 
     // Create the geometry
     this.geometry = new THREE.CylinderGeometry( 20, 20, 5, 32 );
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.captured = false;
+    this.mesh.capturable = false;
+    this.mesh.scale.set(0.5, 0.5, 0.5);
 
     this.update = function coinUpdate() {
         if (this.mesh.captured) {
@@ -18,6 +23,7 @@ Game.prototype.Coin = function (game) {
                 var newScale = curScale - 0.1;
                 if (newScale <= 0) {
                     newScale = 0.01;
+                    this.mesh.visible = false;
                 }
                 this.mesh.scale.set(newScale, newScale, newScale);
             }

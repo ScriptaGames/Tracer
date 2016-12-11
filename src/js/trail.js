@@ -20,7 +20,7 @@ Game.prototype.Trail = function (game, points) {
         depthWrite: true,
         blending: THREE.AdditiveBlending,
         transparent: false,
-        side: THREE.DoubleSide,
+        side: THREE.FrontSide,
         visibility: 1,
     });
 

@@ -25,7 +25,7 @@ Game.prototype.states.play = function (game) {
 
     // init coins
 
-    this.placeCoins(game);
+    this.placeCoins(game, game.modelPoints.LeePerrySmith);
 
     // init player's light source
 
@@ -103,7 +103,7 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
     if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
         var cmesh = collisionResults[0].object;
 
-        if (!cmesh.captured) {
+        if (/*cmesh.capturable &&*/ !cmesh.captured) {
             cmesh.captured = true;
             var position = cmesh.position.clone();
 
@@ -114,24 +114,61 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
     }
 };
 
-Game.prototype.states.play.prototype.placeCoins = function (game) {
+Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
+
+    // Find the angle between three points
+    function angle(A, B, C) {
+        var AB = B.clone().sub(A);
+        var BC = C.clone().sub(B);
+        return Math.acos( AB.dot(BC) / (AB.length() * BC.length()));
+    }
+
     this.coins = [];
     this.coinMeshes = [];
-    for (var i = 1; i < 100; i++) {
-        var coin = new game.Coin(game);
-        coin.mesh.position.x = _.random(-500, 500);
-        coin.mesh.position.y = _.random(-500, 500);
-        coin.mesh.position.z = _.random(-500, 500);
-        this.meshes.push(coin.mesh);
-        game.scene.add(coin.mesh);
+    this.coinBalance = 0;
+    this.coinBudget = 0.6;
 
-        if (this.meshes[i-1]) {
-            coin.mesh.lookAt(this.meshes[i-1].position);
+    // game.scene.add(new game.Trail(game, modelPoints).mesh);
+
+    var posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
+    var posTwo = new THREE.Vector3( modelPoints[3], modelPoints[4], modelPoints[5] );
+
+    var coinOne = this.addCoin(game, posOne, null);
+    var coinTwo = this.addCoin(game, posTwo, coinOne);
+
+    for (var i = 6; i < modelPoints.length; i += 3) {
+        var point         = new THREE.Vector3( modelPoints[i]   , modelPoints[i+1]   , modelPoints[i+2] );
+        var prevPoint     = new THREE.Vector3( modelPoints[i-3] , modelPoints[i+1-3] , modelPoints[i+2-3] );
+        var prevPrevPoint = new THREE.Vector3( modelPoints[i-6] , modelPoints[i+1-6] , modelPoints[i+2-6] );
+
+        var prevCoin = this.coins[this.coins.length - 1];
+
+        // if there are three points added so far, check
+        this.coinBalance += angle(point, prevPoint, prevPrevPoint);
+        if (this.coinBalance > this.coinBudget) {
+            var thisCoin = this.addCoin(game, point, prevCoin);
+            prevCoin.next = thisCoin;
+            console.log('adding a coin');
+            this.coinBalance = 0;
         }
-
-        this.coins.push(coin);
-        this.coinMeshes.push(coin.mesh);
     }
+};
+
+Game.prototype.states.play.prototype.addCoin = function (game, point, prevCoin) {
+    var coin = new game.Coin(game);
+    coin.mesh.position.copy(point);
+    this.meshes.push(coin.mesh);
+    game.scene.add(coin.mesh);
+
+    if (prevCoin) {
+        coin.mesh.lookAt(prevCoin.mesh.position);
+        coin.mesh.rotateX(Math.PI/2);
+    }
+
+    this.coins.push(coin);
+    this.coinMeshes.push(coin.mesh);
+
+    return coin;
 };
 
 Game.prototype.states.play.prototype.initParticles = function playInitParticles() {

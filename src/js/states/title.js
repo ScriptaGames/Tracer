@@ -68,7 +68,7 @@ Game.prototype.states.title = function (game) {
 };
 
 Game.prototype.states.title.prototype.update = function (game) {
-    // this.mesh.rotation.y += 0.005;
+    // game.setState('play');
 };
 
 Game.prototype.states.title.prototype.destroy = function (game) {
