@@ -56,7 +56,16 @@ Game.prototype.states.play.prototype.update = function (game) {
         // check for coin collisions
         this.checkCoinCollisions();
 
+        // update the coins
+        this.updateCoins();
+
         this.playerVelocity.set(0, 0, 0);
+    }
+};
+
+Game.prototype.states.play.prototype.updateCoins = function playUpdateCoins() {
+    for (var i = 0, l = this.coins.length; i < l; i++) {
+        this.coins[i].update();
     }
 };
 
@@ -88,7 +97,8 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
     var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize(), 0, 100 );
     var collisionResults = ray.intersectObjects( this.coinMeshes );
     if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
-        console.log(" Hit ");
+        var cmesh = collisionResults[0].object;
+        cmesh.captured = true;
     }
 };
 
