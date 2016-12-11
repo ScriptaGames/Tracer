@@ -23,8 +23,13 @@ Game.prototype.states.title = function (game) {
     // Add the room cube
     var textureLoader = new THREE.TextureLoader();
 
+    // tile wall texture
     game.textures.wallTexture.wrapS = game.textures.wallTexture.wrapT = THREE.MirroredRepeatWrapping;
-    game.textures.wallTexture.repeat.set(6, 6);
+    game.textures.wallTexture.repeat.set(12, 12);
+
+    // tile floor texture
+    game.textures.floorTexture.wrapS = game.textures.floorTexture.wrapT = THREE.MirroredRepeatWrapping;
+    game.textures.floorTexture.repeat.set(12, 12);
 
     var wallMaterial = new THREE.MeshPhongMaterial({
         map: game.textures.wallTexture,
