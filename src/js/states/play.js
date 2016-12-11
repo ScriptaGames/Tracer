@@ -72,17 +72,23 @@ Game.prototype.states.play.prototype.destroy = function (game) {
 
 Game.prototype.states.play.prototype.checkCoinCollisions = function checkCoinCollisions() {
     var originPoint = this.playerPosition.position.clone();
+    var vertices = this.sphere.geometry.vertices;
 
-    for (var vertexIndex = 0; vertexIndex < this.sphere.geometry.vertices.length; vertexIndex++)
-    {
-        var localVertex = this.sphere.geometry.vertices[vertexIndex].clone();
-        var globalVertex = localVertex.applyMatrix4( this.sphere.matrix );
-        var directionVector = globalVertex.sub( this.sphere.position );
+    // check three rays from sphere
+    this.checkRay( originPoint, vertices[0] );
+    this.checkRay( originPoint, vertices[Math.floor(vertices.length / 2)] );
+    this.checkRay( originPoint, vertices[vertices.length - 1] );
+};
 
-        var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize(), 0, 100 );
-        var collisionResults = ray.intersectObjects( this.coinMeshes );
-        if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() )
-            console.log(" Hit ");
+Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoint, vertex) {
+    var localVertex = vertex.clone();
+    var globalVertex = localVertex.applyMatrix4( this.sphere.matrix );
+    var directionVector = globalVertex.sub( this.sphere.position );
+
+    var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize(), 0, 100 );
+    var collisionResults = ray.intersectObjects( this.coinMeshes );
+    if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
+        console.log(" Hit ");
     }
 };
 
