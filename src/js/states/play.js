@@ -3,16 +3,29 @@ Game.prototype.states.play = function (game) {
     console.log('[play.js] creating play state');
 
     this.meshes = [];
-    this.coins = [];
 
     this.playerPosition = new THREE.Object3D();
     this.playerVelocity = new THREE.Vector3();
+
+    // init trail
 
     this.trail = new game.Trail(game);
     this.meshes.push(this.trail.mesh);
     game.scene.add(this.trail.mesh);
 
-    // Add the coins
+    // init player sphere
+
+    var sphereGeo = new THREE.SphereGeometry(1.0, 32, 32);
+    var sphereMat = new THREE.MeshBasicMaterial({
+        color: '#00cdfc',
+    });
+    this.sphere = new THREE.Mesh(sphereGeo, sphereMat);
+    game.scene.add(this.sphere);
+    this.meshes.push(this.sphere);
+
+    // init coins
+
+    this.coins = [];
     for (var i = 1; i < 100; i++) {
         var coin = new game.Coin(game);
         coin.mesh.position.x = _.random(-500, 500);
@@ -28,7 +41,8 @@ Game.prototype.states.play = function (game) {
         this.coins.push(coin);
     }
 
-    // Add a point light in the middle of the room
+    // init player's light source
+
     this.light = new THREE.PointLight(new THREE.Color(THREE.ColorKeywords.white), 1, 2000);
     game.scene.add(this.light);
 
@@ -46,6 +60,9 @@ Game.prototype.states.play.prototype.update = function (game) {
 
         // move light
         this.light.position.copy(this.playerPosition.position);
+
+        // move sphere
+        this.sphere.position.copy(this.playerPosition.position);
 
         // advance trail to player position
         this.trail.meshLine.advance(this.playerPosition.position);

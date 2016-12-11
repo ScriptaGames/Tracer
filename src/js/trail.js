@@ -4,10 +4,11 @@ Game.prototype.Trail = function (game) {
 
     // Create the line material
     this.material = new THREE.MeshLineMaterial( {
-        // color: new THREE.Color( "rgb(255, 255, 255)" ),
-        opacity: 0.9,
-        useMap: true,
-        map: game.textures.trailStroke,
+        color: new THREE.Color( "#00cdfc" ),
+        opacity: 1.0,
+        useMap: false,
+        // useMap: true,
+        // map: game.textures.trailStroke,
         resolution: new THREE.Vector2( window.innerWidth, window.innerHeight ),
         sizeAttenuation: 1,
         lineWidth: 2.3,
