@@ -39,10 +39,10 @@ Game.prototype.states.title = function (game) {
     var materials = [
         wallMaterial,
         wallMaterial,
-        wallMaterial,
-        wallMaterial,
         new THREE.MeshPhongMaterial( { map: game.textures.ceilingTexture, side: THREE.DoubleSide } ),
-        new THREE.MeshPhongMaterial( { map: game.textures.floorTexture, side: THREE.DoubleSide } )
+        new THREE.MeshPhongMaterial( { map: game.textures.floorTexture, side: THREE.DoubleSide } ),
+        wallMaterial,
+        wallMaterial,
     ];
     var faceMaterial = new THREE.MeshFaceMaterial( materials );
 
