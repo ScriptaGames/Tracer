@@ -20,6 +20,10 @@ Game.prototype.states.title = function (game) {
 
     game.scene.add(this.mesh);
 
+    // widen fov to see the full room
+    game.camera.fov = 85;
+    game.camera.updateProjectionMatrix();
+
     // Add the room cube
     var textureLoader = new THREE.TextureLoader();
 
@@ -55,6 +59,8 @@ Game.prototype.states.title = function (game) {
 
     var ambientLight = new THREE.AmbientLight(0x404040);
     game.scene.add(ambientLight);
+    this.light = game.light;
+    game.scene.add(this.light);
 
     //
 
@@ -76,5 +82,11 @@ Game.prototype.states.title.prototype.destroy = function (game) {
 
     game.removeMesh(this.mesh);
 
+    game.scene.remove(this.light);
+
     document.body.removeChild(this.btn);
+
+    // widen fov to see the full room
+    game.camera.fov = 50;
+    game.camera.updateProjectionMatrix();
 };

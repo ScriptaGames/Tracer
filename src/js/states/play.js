@@ -25,11 +25,11 @@ Game.prototype.states.play = function (game) {
 
     // init coins
 
-    this.placeCoins(game, game.modelPoints.LeePerrySmith);
+    this.placeCoins(game, game.modelPoints.cube);
 
     // init player's light source
 
-    this.light = new THREE.PointLight(new THREE.Color(THREE.ColorKeywords.white), 1, 2000);
+    this.light = game.light;
     game.scene.add(this.light);
 
     game.createControls(this.playerPosition.position);

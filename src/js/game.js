@@ -7,6 +7,9 @@ var Game = function () {
     // global game clock
     this.clock = new THREE.Clock();
 
+    // point light for re-use
+    this.light = new THREE.PointLight(new THREE.Color(THREE.ColorKeywords.white), 1, 2000);
+
     // start lagscale at 1, assuming no lag
     this.lagScale = 1;
 
