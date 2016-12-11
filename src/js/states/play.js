@@ -25,23 +25,7 @@ Game.prototype.states.play = function (game) {
 
     // init coins
 
-    this.coins = [];
-    this.coinMeshes = [];
-    for (var i = 1; i < 100; i++) {
-        var coin = new game.Coin(game);
-        coin.mesh.position.x = _.random(-500, 500);
-        coin.mesh.position.y = _.random(-500, 500);
-        coin.mesh.position.z = _.random(-500, 500);
-        this.meshes.push(coin.mesh);
-        game.scene.add(coin.mesh);
-
-        if (this.meshes[i-1]) {
-            coin.mesh.lookAt(this.meshes[i-1].position);
-        }
-
-        this.coins.push(coin);
-        this.coinMeshes.push(coin.mesh);
-    }
+    this.placeCoins(game);
 
     // init player's light source
 
@@ -86,7 +70,6 @@ Game.prototype.states.play.prototype.destroy = function (game) {
     game.removeControls();
 };
 
-
 Game.prototype.states.play.prototype.checkCoinCollisions = function checkCoinCollisions() {
     var originPoint = this.playerPosition.position.clone();
 
@@ -100,5 +83,25 @@ Game.prototype.states.play.prototype.checkCoinCollisions = function checkCoinCol
         var collisionResults = ray.intersectObjects( this.coinMeshes );
         if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() )
             console.log(" Hit ");
+    }
+};
+
+Game.prototype.states.play.prototype.placeCoins = function (game) {
+    this.coins = [];
+    this.coinMeshes = [];
+    for (var i = 1; i < 100; i++) {
+        var coin = new game.Coin(game);
+        coin.mesh.position.x = _.random(-500, 500);
+        coin.mesh.position.y = _.random(-500, 500);
+        coin.mesh.position.z = _.random(-500, 500);
+        this.meshes.push(coin.mesh);
+        game.scene.add(coin.mesh);
+
+        if (this.meshes[i-1]) {
+            coin.mesh.lookAt(this.meshes[i-1].position);
+        }
+
+        this.coins.push(coin);
+        this.coinMeshes.push(coin.mesh);
     }
 };

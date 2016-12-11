@@ -1,6 +1,7 @@
-Game.prototype.Trail = function (game) {
+Game.prototype.Trail = function (game, points) {
     this.game = game;
     this.origin = new THREE.Vector3(1);
+    this.length = points ? points.length/3 : 18000;
 
     // Create the line material
     this.material = new THREE.MeshLineMaterial( {
@@ -24,9 +25,22 @@ Game.prototype.Trail = function (game) {
 
     // Create the line geometry used for storing verticies
     this.trail_geometry = new THREE.Geometry();
-    for (var i = 0; i < 18000; i++) {
-        // must initialize it to the number of positions it will keep or it will throw an error
-        this.trail_geometry.vertices.push(this.origin.clone());
+    if (points) {
+        // apply points to geometry
+        for (var i = 0; i < points.length; i += 3) {
+            this.trail_geometry.vertices.push(new THREE.Vector3(
+                points[i],
+                points[i+1],
+                points[i+2]
+            ));
+        }
+    }
+    else {
+        // generate a certain number of points
+        for (var i = 0; i < this.length; i++) {
+            // must initialize it to the number of positions it will keep or it will throw an error
+            this.trail_geometry.vertices.push(this.origin.clone());
+        }
     }
 
     this.meshLine = new THREE.MeshLine();
