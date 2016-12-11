@@ -16,6 +16,7 @@ var Game = function () {
     // some objects to store preloaded assets
     this.textures = {};
     this.fonts = {};
+    this.modelPoints = {};
 
     // create some fake controls that do nothing, real controls are created by each state
     this.controls = {
@@ -104,6 +105,10 @@ Game.prototype.removeMesh = function (mesh) {
 
 Game.prototype.registerTexture = function (name, texture) {
     this.textures[name] = texture;
+};
+
+Game.prototype.registerModelPoints = function (name, modelPoints) {
+    this.modelPoints[name] = modelPoints;
 };
 
 Game.prototype.registerFont = function (name, font) {

@@ -7,6 +7,9 @@ Game.prototype.states.preload = function (game) {
 
     this.fontLoader = new THREE.FontLoader();
     this.textureLoader = new THREE.TextureLoader();
+    this.jsonLoader = new THREE.JSONLoader();
+
+    this.preloadModelPoints('models/LeePerrySmith.json', 'LeePerrySmith');
 
     this.preloadTexture('textures/stroke.png', 'trailStroke');
     this.preloadTexture('textures/wall.jpg', 'wallTexture');
@@ -38,6 +41,15 @@ Game.prototype.states.preload.prototype.preloadTexture = function (textureFile, 
     this.addPending();
     this.textureLoader.load(textureFile, function (texture) {
         this.game.registerTexture(textureName, texture);
+        this.resolvePending();
+    }.bind(this));
+};
+
+Game.prototype.states.preload.prototype.preloadModelPoints = function (modelPointsFile, modelPointsName) {
+    this.addPending();
+    fetch(modelPointsFile).then(function (res) { return res.json(); }).then(function (modelPoints) {
+        var typedArray = Float32Array.from(modelPoints);
+        this.game.registerModelPoints(modelPointsName, typedArray);
         this.resolvePending();
     }.bind(this));
 };
