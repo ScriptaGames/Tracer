@@ -61,16 +61,6 @@ Game.prototype.states.title = function (game) {
     game.scene.add(ambientLight);
     this.light = game.light;
     game.scene.add(this.light);
-
-    //
-
-    this.btn = document.createElement('button');
-    this.btn.innerHTML = 'Play';
-    this.btn.classList.add('play');
-    this.btn.addEventListener('click', function () {
-        game.setState('play');
-    });
-    document.body.appendChild(this.btn);
 };
 
 Game.prototype.states.title.prototype.update = function (game) {
@@ -83,8 +73,6 @@ Game.prototype.states.title.prototype.destroy = function (game) {
     game.removeMesh(this.mesh);
 
     game.scene.remove(this.light);
-
-    document.body.removeChild(this.btn);
 
     // widen fov to see the full room
     game.camera.fov = 50;

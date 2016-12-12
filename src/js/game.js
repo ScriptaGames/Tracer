@@ -20,6 +20,7 @@ var Game = function () {
     this.textures = {};
     this.fonts = {};
     this.modelPoints = {};
+    this.templates = {};
 
     // create some fake controls that do nothing, real controls are created by each state
     this.controls = {
@@ -54,6 +55,11 @@ Game.prototype.setState = function (stateName) {
     // if we're already in a state, destroy it
     if (this.state) {
         this.state.destroy(game);
+    }
+
+    // if the UI has been initialized, let it know what state we're in too
+    if (this.ui) {
+        this.ui.set('state', stateName);
     }
 
     // switch to new state!
@@ -117,3 +123,19 @@ Game.prototype.registerModelPoints = function (name, modelPoints) {
 Game.prototype.registerFont = function (name, font) {
     this.fonts[name] = font;
 };
+
+Game.prototype.registerTemplate = function (name, template) {
+    this.templates[name] = template;
+};
+
+Game.prototype.initUI = function () {
+    // init the UI overlay
+    this.ui = new Ractive({
+        el: '.ui-container',
+        data: {
+            gameName: 'tracer',
+        },
+        template: this.templates.main,
+    });
+};
+
