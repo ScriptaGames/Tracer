@@ -9,12 +9,14 @@ Game.prototype.states.preload = function (game) {
     this.textureLoader = new THREE.TextureLoader();
     this.jsonLoader = new THREE.JSONLoader();
 
-    this.preloadModelPoints('models/LeePerrySmith.json', 'LeePerrySmith', 5);
-    this.preloadModelPoints('models/cone.json', 'cone', 6);
-    this.preloadModelPoints('models/cube.json', 'cube', 6);
-    this.preloadModelPoints('models/football.json', 'football', 5);
-    this.preloadModelPoints('models/monkey.json', 'monkey', 1);
-    this.preloadModelPoints('models/null.json', 'null', 1);
+    this.preloadModelPoints('models/monkey.json'        , 'level6' , 5);
+    this.preloadModelPoints('models/LeePerrySmith.json' , 'level5' , 5);
+    this.preloadModelPoints('models/football.json'      , 'level4' , 5);
+    this.preloadModelPoints('models/cube.json'          , 'level3' , 6);
+    this.preloadModelPoints('models/cone.json'          , 'level2' , 6);
+    this.preloadModelPoints('models/line.json'          , 'level1' , 9);
+    this.preloadModelPoints('models/onepoint.json'      , 'level0' , 1);
+    this.preloadModelPoints('models/empty.json'          , 'empty'   , 1);
 
     this.preloadTexture('textures/stroke.png', 'trailStroke');
     this.preloadTexture('textures/wall.jpg', 'wallTexture');

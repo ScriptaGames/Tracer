@@ -38,6 +38,8 @@ Game.prototype.states.play = function (game, params) {
     this.light = game.light;
     game.scene.add(this.light);
 
+    game.resetCamera();
+
     game.createControls(this.playerPosition.position);
 
     // face center

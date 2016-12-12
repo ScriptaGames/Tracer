@@ -68,11 +68,15 @@ Game.prototype.setState = function (stateName, params) {
     this.state = new this.states[stateName](this, params);
 };
 
+Game.prototype.resetCamera = function () {
+    this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
+    this.camera.position.z = 400;
+};
+
 Game.prototype.createScene = function () {
     console.log('[game.js] creating scene');
 
-    this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
-    this.camera.position.z = 400;
+    this.resetCamera();
 
     this.container = document.querySelector('.game-container');
     this.scene = new THREE.Scene();
@@ -139,10 +143,10 @@ Game.prototype.initUI = function () {
         template: this.templates.main,
     });
     this.ui.on('play-challenge', function () {
-        this.setState('play', { model: 'cone' });
+        this.setState('play', { model: 'level0' });
     }.bind(this));
     this.ui.on('play-free-draw', function () {
-        this.setState('play', { model: 'null' });
+        this.setState('play', { model: 'empty' });
     }.bind(this));
 };
 
