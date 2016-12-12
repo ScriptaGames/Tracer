@@ -40,22 +40,29 @@ html, body {
     height: 18.866667vw;
     width: 32.466667vw;
     font-size: 9rem;
+    -webkit-transition: -webkit-transform 0.618s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: -webkit-transform 0.618s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition: transform 0.618s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.618s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.618s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     left: 34%;
     top: 0;
 }
 .title-button.free-draw-button {
     background: url('../images/free-draw-button.png') no-repeat scroll 0 0 transparent;
-    transform: translate(46%, 22%);
+    -webkit-transform: translate(46%, 22%);
+            transform: translate(46%, 22%);
 }
 .title-button.free-draw-button:hover {
-    transform: translate(46%, 22%) scale(0.97, 0.97);
+    -webkit-transform: translate(46%, 22%) scale(0.97, 0.97);
+            transform: translate(46%, 22%) scale(0.97, 0.97);
 }
 .title-button.play-button {
     background: url('../images/play-button.png') no-repeat scroll 0 0 transparent;
-    transform: translate(-46%, -22%);
+    -webkit-transform: translate(-46%, -22%);
+            transform: translate(-46%, -22%);
 }
 .title-button.play-button:hover {
-    transform: translate(-46%, -22%) scale(0.97, 0.97);
+    -webkit-transform: translate(-46%, -22%) scale(0.97, 0.97);
+            transform: translate(-46%, -22%) scale(0.97, 0.97);
 }

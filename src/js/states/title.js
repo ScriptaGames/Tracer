@@ -2,24 +2,6 @@ Game.prototype.states.title = function (game) {
     this.name = 'title';
     console.log('[title.js] creating title state');
 
-    this.geometry = new THREE.TextGeometry(
-        'Tracer',
-        {
-            size: 40,
-            height: 9,
-            curveSegments : 1,
-            font : game.fonts.titleFont,
-            bevelEnabled : true,
-            bevelThickness : 2,
-            bevelSize : 1.5
-        }
-    );
-    this.geometry.center();
-    this.material = new THREE.MeshNormalMaterial();
-    this.mesh = new THREE.Mesh(this.geometry, this.material);
-
-    game.scene.add(this.mesh);
-
     // widen fov to see the full room
     game.camera.fov = 85;
     game.camera.updateProjectionMatrix();
@@ -61,16 +43,6 @@ Game.prototype.states.title = function (game) {
     game.scene.add(ambientLight);
     this.light = game.light;
     game.scene.add(this.light);
-
-    //
-
-    this.btn = document.createElement('button');
-    this.btn.innerHTML = 'Play';
-    this.btn.classList.add('play');
-    this.btn.addEventListener('click', function () {
-        game.setState('play');
-    });
-    document.body.appendChild(this.btn);
 };
 
 Game.prototype.states.title.prototype.update = function (game) {
@@ -80,11 +52,7 @@ Game.prototype.states.title.prototype.update = function (game) {
 Game.prototype.states.title.prototype.destroy = function (game) {
     console.log('[title.js] destroying title state');
 
-    game.removeMesh(this.mesh);
-
     game.scene.remove(this.light);
-
-    document.body.removeChild(this.btn);
 
     // widen fov to see the full room
     game.camera.fov = 50;

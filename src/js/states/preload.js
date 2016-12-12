@@ -20,6 +20,9 @@ Game.prototype.states.preload = function (game) {
     this.preloadTexture('textures/ceiling.png', 'ceilingTexture');
     this.preloadTexture('textures/floor.jpg', 'floorTexture');
 
+    this.preloadTemplate('templates/title.html', 'title');
+    this.preloadTemplate('templates/main.html', 'main');
+
     this.preloadFont('fonts/helvetiker_regular.typeface.json', 'titleFont');
 
     this.checkPending();
@@ -29,6 +32,8 @@ Game.prototype.states.preload.prototype.update = function (game) {
 };
 
 Game.prototype.states.preload.prototype.destroy = function (game) {
+    // when preload is done, init the UI
+    game.initUI();
     console.log('[preload.js] destroying preload state');
 };
 
@@ -58,6 +63,14 @@ Game.prototype.states.preload.prototype.preloadModelPoints = function (modelPoin
             typedArray[i] *= scale;
         }
         this.game.registerModelPoints(modelPointsName, typedArray);
+        this.resolvePending();
+    }.bind(this));
+};
+
+Game.prototype.states.preload.prototype.preloadTemplate = function (templateFile, templateName, scale) {
+    this.addPending();
+    fetch(templateFile).then(function (res) { return res.text(); }).then(function (template) {
+        this.game.registerTemplate(templateName, template);
         this.resolvePending();
     }.bind(this));
 };
