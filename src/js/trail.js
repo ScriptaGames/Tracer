@@ -1,6 +1,6 @@
-Game.prototype.Trail = function (game, points) {
+Game.prototype.Trail = function (game, points, origin) {
     this.game = game;
-    this.origin = new THREE.Vector3(1);
+    this.origin = origin ? origin.clone() : new THREE.Vector3(1);
     this.length = points ? points.length/3 : 18000;
 
     // Create the line material

@@ -1,17 +1,22 @@
 Game.prototype.states.play = function (game) {
+    var self = this;
+
     this.name = 'play';
     console.log('[play.js] creating play state');
 
     this.meshes = [];
 
     this.playerPosition = new THREE.Object3D();
+    this.playerPosition.position.z -= 600;
     this.playerVelocity = new THREE.Vector3();
 
     // init trail
+    setTimeout(function initTrail() {
+        self.trail = new game.Trail(game, null, self.playerPosition.position);
+        self.meshes.push(self.trail.mesh);
+        game.scene.add(self.trail.mesh);
+    }, 83);
 
-    this.trail = new game.Trail(game);
-    this.meshes.push(this.trail.mesh);
-    game.scene.add(this.trail.mesh);
 
     // init player sphere
 
@@ -37,6 +42,8 @@ Game.prototype.states.play = function (game) {
 
     game.createControls(this.playerPosition.position);
 
+    // face center
+    game.camera.position.copy( this.playerPosition.position.clone().multiplyScalar(1.2) );
 
     this.initParticles();
 
