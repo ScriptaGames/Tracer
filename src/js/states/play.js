@@ -1,22 +1,19 @@
-Game.prototype.states.play = function (game) {
-    var self = this;
-
+Game.prototype.states.play = function (game, params) {
     this.name = 'play';
     console.log('[play.js] creating play state');
 
     this.meshes = [];
+
+    this.params = params;
 
     this.playerPosition = new THREE.Object3D();
     this.playerPosition.position.z -= 600;
     this.playerVelocity = new THREE.Vector3();
 
     // init trail
-    setTimeout(function initTrail() {
-        self.trail = new game.Trail(game, null, self.playerPosition.position);
-        self.meshes.push(self.trail.mesh);
-        game.scene.add(self.trail.mesh);
-    }, 83);
-
+    this.trail = new game.Trail(game, null, this.playerPosition.position);
+    this.meshes.push(this.trail.mesh);
+    game.scene.add(this.trail.mesh);
 
     // init player sphere
 
@@ -30,10 +27,12 @@ Game.prototype.states.play = function (game) {
 
     // init coins
 
-    this.placeCoins(game, game.modelPoints.LeePerrySmith);
+    this.placeCoins(game, game.modelPoints[params.model]);
 
     // Opacity gradiant starting with the first coin being solid
-    this.advanceCoin(this.coins[0]);
+    if (this.coins[0]) {
+        this.advanceCoin(this.coins[0]);
+    }
 
     // init player's light source
 
@@ -63,7 +62,6 @@ Game.prototype.states.play.prototype.update = function (game) {
 
         // advance trail to player position
         this.trail.meshLine.advance(this.playerPosition.position);
-
 
         this.playerVelocity.set(0, 0, 0);
     }
@@ -124,7 +122,7 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
 
             // trigger particle explosion
             this.particleBurst( position );
-            console.log("Hit")
+            console.log("[play.js] coin hit")
         }
     }
 };
@@ -145,29 +143,33 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
 
     // game.scene.add(new game.Trail(game, modelPoints).mesh);
 
-    var posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
-    var posTwo = new THREE.Vector3( modelPoints[3], modelPoints[4], modelPoints[5] );
+    if (modelPoints.length) {
 
-    var coinOne = this.addCoin(game, posOne, null);
-    var coinTwo = this.addCoin(game, posTwo, coinOne);
+        var posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
+        var posTwo = new THREE.Vector3( modelPoints[3], modelPoints[4], modelPoints[5] );
 
-    coinOne.next = coinTwo;
+        var coinOne = this.addCoin(game, posOne, null);
+        var coinTwo = this.addCoin(game, posTwo, coinOne);
 
-    for (var i = 6; i < modelPoints.length; i += 3) {
-        var point         = new THREE.Vector3( modelPoints[i]   , modelPoints[i+1]   , modelPoints[i+2] );
-        var prevPoint     = new THREE.Vector3( modelPoints[i-3] , modelPoints[i+1-3] , modelPoints[i+2-3] );
-        var prevPrevPoint = new THREE.Vector3( modelPoints[i-6] , modelPoints[i+1-6] , modelPoints[i+2-6] );
+        coinOne.next = coinTwo;
 
-        var prevCoin = this.coins[this.coins.length - 1];
+        for (var i = 6; i < modelPoints.length; i += 3) {
+            var point         = new THREE.Vector3( modelPoints[i]   , modelPoints[i+1]   , modelPoints[i+2] );
+            var prevPoint     = new THREE.Vector3( modelPoints[i-3] , modelPoints[i+1-3] , modelPoints[i+2-3] );
+            var prevPrevPoint = new THREE.Vector3( modelPoints[i-6] , modelPoints[i+1-6] , modelPoints[i+2-6] );
 
-        // if there are three points added so far, check
-        this.coinBalance += angle(point, prevPoint, prevPrevPoint);
-        if (this.coinBalance > this.coinBudget) {
-            var thisCoin = this.addCoin(game, point, prevCoin);
-            prevCoin.next = thisCoin;
-            console.log('adding a coin');
-            this.coinBalance = 0;
+            var prevCoin = this.coins[this.coins.length - 1];
+
+            // if there are three points added so far, check
+            this.coinBalance += angle(point, prevPoint, prevPrevPoint);
+            if (this.coinBalance > this.coinBudget) {
+                var thisCoin = this.addCoin(game, point, prevCoin);
+                prevCoin.next = thisCoin;
+                console.log('[play.js] adding a coin');
+                this.coinBalance = 0;
+            }
         }
+
     }
 };
 

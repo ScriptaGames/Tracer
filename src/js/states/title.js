@@ -3,7 +3,7 @@ Game.prototype.states.title = function (game) {
     console.log('[title.js] creating title state');
 
     // widen fov to see the full room
-    game.camera.fov = 85;
+    game.camera.fov = 100;
     game.camera.updateProjectionMatrix();
 
     // Add the room cube

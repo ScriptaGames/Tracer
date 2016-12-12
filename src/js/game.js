@@ -51,7 +51,7 @@ Game.prototype.update = function () {
 };
 
 Game.prototype.states = {};
-Game.prototype.setState = function (stateName) {
+Game.prototype.setState = function (stateName, params) {
     // if we're already in a state, destroy it
     if (this.state) {
         this.state.destroy(game);
@@ -60,11 +60,12 @@ Game.prototype.setState = function (stateName) {
     // if the UI has been initialized, let it know what state we're in too
     if (this.ui) {
         this.ui.set('state', stateName);
+        this.ui.set('stateParams', params);
     }
 
     // switch to new state!
     console.log('[game.js] setting state to ' + stateName);
-    this.state = new this.states[stateName](this);
+    this.state = new this.states[stateName](this, params);
 };
 
 Game.prototype.createScene = function () {
@@ -138,10 +139,10 @@ Game.prototype.initUI = function () {
         template: this.templates.main,
     });
     this.ui.on('play-challenge', function () {
-        this.setState('play');
+        this.setState('play', { model: 'cone' });
     }.bind(this));
     this.ui.on('play-free-draw', function () {
-        this.setState('play');
+        this.setState('play', { model: 'null' });
     }.bind(this));
 };
 

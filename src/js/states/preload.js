@@ -14,6 +14,7 @@ Game.prototype.states.preload = function (game) {
     this.preloadModelPoints('models/cube.json', 'cube', 6);
     this.preloadModelPoints('models/football.json', 'football', 5);
     this.preloadModelPoints('models/monkey.json', 'monkey', 1);
+    this.preloadModelPoints('models/null.json', 'null', 1);
 
     this.preloadTexture('textures/stroke.png', 'trailStroke');
     this.preloadTexture('textures/wall.jpg', 'wallTexture');
