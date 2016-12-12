@@ -20,7 +20,7 @@ Game.prototype.states.play = function (game, params) {
 
     var sphereGeo = new THREE.SphereGeometry(1.0, 10, 10);
     var sphereMat = new THREE.MeshBasicMaterial({
-        color: '#00cdfc',
+        color: '#8DD1FF',
     });
     this.sphere = new THREE.Mesh(sphereGeo, sphereMat);
     game.scene.add(this.sphere);
