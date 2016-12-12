@@ -1,5 +1,6 @@
 Game.prototype.states.play = function (game, params) {
     this.name = 'play';
+    this.game = game;
     console.log('[play.js] creating play state');
 
     this.meshes = [];
@@ -84,11 +85,6 @@ Game.prototype.states.play.prototype.updateCoins = function playUpdateCoins() {
 
 Game.prototype.states.play.prototype.destroy = function (game) {
     console.log('[play.js] destroying play state');
-
-    game.scene.remove(this.light);
-
-    this.meshes.forEach(game.removeMesh.bind(game));
-
     game.removeControls();
 };
 
@@ -119,6 +115,9 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
             if (cmesh.coin.next) {
                 // Advance the capture state and opacity to the next coins
                 this.advanceCoin(cmesh.coin.next);
+            }
+            else {
+                this.game.setState('levelend', { playState: this });
             }
 
             // trigger particle explosion
@@ -261,17 +260,5 @@ Game.prototype.states.play.prototype.advanceCoin = function playAdvanceCoin(star
                 break;
             }
         }
-    }
-};
-
-Game.prototype.states.play.prototype.loadNextLevel = function playLoadNextLevel() {
-    this.params.levelNum++;
-
-    var nextLevelKey = 'level' + this.params.levelNum;
-    if (game.modelPoints[nextLevelKey]) {
-        game.setState('play', {model: nextLevelKey, levelNum: this.params.levelNum});
-    }
-    else {
-        game.setState('end');
     }
 };

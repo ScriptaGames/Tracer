@@ -24,7 +24,6 @@ Game.prototype.states.preload = function (game) {
     this.preloadTexture('textures/floor.jpg', 'floorTexture');
     this.preloadTexture('textures/coin.png', 'coinTexture');
 
-    this.preloadTemplate('templates/title.html', 'title');
     this.preloadTemplate('templates/main.html', 'main');
 
     this.preloadFont('fonts/helvetiker_regular.typeface.json', 'titleFont');

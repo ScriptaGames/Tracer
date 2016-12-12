@@ -1,7 +1,6 @@
 Game.prototype.states.end = function end(game) {
     this.name = 'end';
     console.log('[end.js] creating end state');
-
 };
 
 Game.prototype.states.end.prototype.update = function titleUpdate(game) {
