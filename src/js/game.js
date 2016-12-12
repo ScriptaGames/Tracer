@@ -63,6 +63,9 @@ Game.prototype.setState = function (stateName, params) {
         this.ui.set('stateParams', params);
     }
 
+    // reset controlls
+    this.controls.steering = this.controls.noopSteering;
+
     // switch to new state!
     console.log('[game.js] setting state to ' + stateName);
     this.state = new this.states[stateName](this, params);
@@ -143,7 +146,7 @@ Game.prototype.initUI = function () {
         template: this.templates.main,
     });
     this.ui.on('play-challenge', function () {
-        this.setState('play', { model: 'level0' });
+        this.setState('play', { model: 'level0', levelNum: 0 });
     }.bind(this));
     this.ui.on('play-free-draw', function () {
         this.setState('play', { model: 'empty' });

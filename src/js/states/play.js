@@ -263,3 +263,15 @@ Game.prototype.states.play.prototype.advanceCoin = function playAdvanceCoin(star
         }
     }
 };
+
+Game.prototype.states.play.prototype.loadNextLevel = function playLoadNextLevel() {
+    this.params.levelNum++;
+
+    var nextLevelKey = 'level' + this.params.levelNum;
+    if (game.modelPoints[nextLevelKey]) {
+        game.setState('play', {model: nextLevelKey, levelNum: this.params.levelNum});
+    }
+    else {
+        game.setState('end');
+    }
+};
