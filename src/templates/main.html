@@ -7,7 +7,9 @@
 </div>
 {{ /if }}
 {{ #if state === 'levelend' }}
-<p fade-in-out>You finished the level!</p>
+<p fade-in-out>Drawing complete!</p>
+<button fade-in-out on-click="replay-level">Replay</button>
+<button fade-in-out on-click="next-level">Next Level</button>
 {{ /if }}
 {{ #if state === 'end' }}
 <p fade-in-out>You finished the game!</p>

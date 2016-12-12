@@ -151,5 +151,11 @@ Game.prototype.initUI = function () {
     this.ui.on('play-free-draw', function () {
         this.setState('play', { model: 'empty' });
     }.bind(this));
+    this.ui.on('replay-level', function () {
+        this.setState('play', this.state.params.playState.params);
+    }.bind(this));
+    this.ui.on('next-level', function () {
+        this.state.loadNextLevel();
+    }.bind(this));
 };
 

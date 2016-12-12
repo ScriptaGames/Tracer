@@ -117,7 +117,7 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
                 this.advanceCoin(cmesh.coin.next);
             }
             else {
-                this.game.setState('levelend', { playState: this });
+                this.endLevel();
             }
 
             // trigger particle explosion
@@ -125,6 +125,10 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
             console.log("[play.js] coin hit")
         }
     }
+};
+
+Game.prototype.states.play.prototype.endLevel = function () {
+    this.game.setState('levelend', { playState: this });
 };
 
 Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {

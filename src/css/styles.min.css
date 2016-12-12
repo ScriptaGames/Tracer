@@ -31,7 +31,6 @@ html, body {
 }
 
 .title-button {
-    pointer-events: auto;
     background-size: cover !important;
     color: white;
     border: none;
@@ -77,4 +76,8 @@ html, body {
 .title-button.play-button:active {
     -webkit-transform: translate(-46%, -22%) scale(0.94, 0.94);
             transform: translate(-46%, -22%) scale(0.94, 0.94);
+}
+
+button {
+    pointer-events: auto;
 }
