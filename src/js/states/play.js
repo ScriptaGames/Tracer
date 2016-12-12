@@ -26,7 +26,6 @@ Game.prototype.states.play = function (game, params) {
     this.meshes.push(this.sphere);
 
     // init coins
-
     this.placeCoins(game, game.modelPoints[params.model]);
 
     // Opacity gradiant starting with the first coin being solid
@@ -150,6 +149,8 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
 
         var coinOne = this.addCoin(game, posOne, null);
         var coinTwo = this.addCoin(game, posTwo, coinOne);
+        coinOne.mesh.lookAt(coinTwo.mesh.position);
+        coinOne.mesh.rotateX(Math.PI/2);
 
         coinOne.next = coinTwo;
 
