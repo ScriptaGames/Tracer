@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start --server --serveStatic src --files src --directory",
+    "start": "browser-sync start --server --serveStatic src --files 'src/**/*' --no-inject-changes --directory",
     "css": "postcss --use autoprefixer -o src/css/styles.min.css src/css/styles.css"
   },
   "author": "mwcz <mwc@clayto.com>",

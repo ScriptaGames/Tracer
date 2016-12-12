@@ -2,13 +2,14 @@ Game.prototype.Coin = function (game) {
     this.game = game;
 
     // Create the line material
-    this.material = new THREE.MeshNormalMaterial({
+    this.material = new THREE.MeshPhongMaterial({
         transparent: true,
         opacity: 0.1,
+        map: game.textures.coinTexture,
     });
 
     // Create the geometry
-    this.geometry = new THREE.CylinderGeometry( 20, 20, 5, 32 );
+    this.geometry = new THREE.CylinderGeometry( 20, 20, 2, 32 );
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.captured = false;
