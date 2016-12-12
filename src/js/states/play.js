@@ -143,7 +143,7 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
 
     // game.scene.add(new game.Trail(game, modelPoints).mesh);
 
-    if (modelPoints.length) {
+    if (modelPoints.length > 3) {
 
         var posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
         var posTwo = new THREE.Vector3( modelPoints[3], modelPoints[4], modelPoints[5] );
@@ -171,7 +171,12 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
                 this.coinBalance = 0;
             }
         }
-
+    }
+    else if (modelPoints.length === 3) {
+        // just add one coin
+        var posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
+        var coinOne = this.addCoin(game, posOne, null);
+        coinOne.mesh.rotateX(Math.PI/2);
     }
 };
 
