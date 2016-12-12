@@ -142,6 +142,14 @@ Game.prototype.initUI = function () {
         el: '.ui-container',
         data: {
             gameName: 'tracer',
+            congratsMessages: _.shuffle([
+                'Masterfully traced.',
+                'A gold star for you.',
+                'Picasso would be proud.',
+                'Hey, wanna go finger paint?',
+                'Can I hang that in my gallery?',
+            ]),
+            congrats: '',
         },
         template: this.templates.main,
     });

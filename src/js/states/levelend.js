@@ -2,6 +2,8 @@ Game.prototype.states.levelend = function (game, params) {
     this.name = 'levelend';
     this.params = params;
     console.log('[levelend.js] creating levelend state');
+
+    game.ui.set('congrats', game.ui.get('congratsMessages')[params.playState.params.levelNum]);
 };
 
 Game.prototype.states.levelend.prototype.update = function (game) {
