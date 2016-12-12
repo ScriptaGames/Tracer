@@ -45,6 +45,10 @@ html, body {
     left: 34%;
     top: 0;
 }
+.title-button:focus {
+    border: none;
+    outline: none;
+}
 .title-button.free-draw-button {
     background: url('../images/free-draw-button.png') no-repeat scroll 0 0 transparent;
     transform: translate(46%, 22%);
@@ -52,10 +56,16 @@ html, body {
 .title-button.free-draw-button:hover {
     transform: translate(46%, 22%) scale(0.97, 0.97);
 }
+.title-button.free-draw-button:active {
+    transform: translate(46%, 22%) scale(0.94, 0.94);
+}
 .title-button.play-button {
     background: url('../images/play-button.png') no-repeat scroll 0 0 transparent;
     transform: translate(-46%, -22%);
 }
 .title-button.play-button:hover {
     transform: translate(-46%, -22%) scale(0.97, 0.97);
+}
+.title-button.play-button:active {
+    transform: translate(-46%, -22%) scale(0.94, 0.94);
 }
