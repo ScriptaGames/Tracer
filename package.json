@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start --server --serveStatic src --files src --directory"
+    "start": "browser-sync start --server --serveStatic src --files src --directory",
+    "css": "postcss --use autoprefixer -o src/css/styles.min.css src/css/styles.css"
   },
   "author": "mwcz <mwc@clayto.com>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "browser-sync": "^2.18.2"
+    "autoprefixer": "^6.5.3",
+    "browser-sync": "^2.18.2",
+    "postcss-cli": "^2.6.0"
   }
 }

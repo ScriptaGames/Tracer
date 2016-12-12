@@ -1,3 +1,14 @@
 {{ #if state === 'title' }}
-<button>Play</button>
+<div class="button-container">
+    <button fade-in-out on-click="play-challenge" on-tap="play-challenge" class="title-button play-button"></button>
+</div>
+<div class="button-container">
+    <button fade-in-out on-click="play-free-draw" on-tap="play-free-draw" class="title-button free-draw-button"></button>
+</div>
+{{ /if }}
+{{ #if state === 'level-end' }}
+<p fade-in-out>You finished the level!</p>
+{{ /if }}
+{{ #if state === 'game-end' }}
+<p fade-in-out>You finished the game!</p>
 {{ /if }}

@@ -137,5 +137,11 @@ Game.prototype.initUI = function () {
         },
         template: this.templates.main,
     });
+    this.ui.on('play-challenge', function () {
+        this.setState('play');
+    }.bind(this));
+    this.ui.on('play-free-draw', function () {
+        this.setState('play');
+    }.bind(this));
 };
 
