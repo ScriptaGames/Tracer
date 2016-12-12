@@ -3,8 +3,8 @@ Game.prototype.Coin = function (game) {
 
     // Create the line material
     this.material = new THREE.MeshNormalMaterial({
-        // transparent: true,
-        // opacity: 0.4,
+        transparent: true,
+        opacity: 0.1,
     });
 
     // Create the geometry
@@ -28,5 +28,7 @@ Game.prototype.Coin = function (game) {
                 this.mesh.scale.set(newScale, newScale, newScale);
             }
         }
-    }
+    };
+
+    this.mesh.coin = this; // reference to parent coin
 };

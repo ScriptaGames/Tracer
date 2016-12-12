@@ -25,7 +25,10 @@ Game.prototype.states.play = function (game) {
 
     // init coins
 
-    this.placeCoins(game, game.modelPoints.cube);
+    this.placeCoins(game, game.modelPoints.LeePerrySmith);
+
+    // Opacity gradiant starting with the first coin being solid
+    this.advanceCoin(this.coins[0]);
 
     // init player's light source
 
@@ -103,9 +106,14 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
     if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
         var cmesh = collisionResults[0].object;
 
-        if (/*cmesh.capturable &&*/ !cmesh.captured) {
+        if (cmesh.capturable && !cmesh.captured) {
             cmesh.captured = true;
             var position = cmesh.position.clone();
+
+            if (cmesh.coin.next) {
+                // Advance the capture state and opacity to the next coins
+                this.advanceCoin(cmesh.coin.next);
+            }
 
             // trigger particle explosion
             this.particleBurst( position );
@@ -135,6 +143,8 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
 
     var coinOne = this.addCoin(game, posOne, null);
     var coinTwo = this.addCoin(game, posTwo, coinOne);
+
+    coinOne.next = coinTwo;
 
     for (var i = 6; i < modelPoints.length; i += 3) {
         var point         = new THREE.Vector3( modelPoints[i]   , modelPoints[i+1]   , modelPoints[i+2] );
@@ -220,4 +230,24 @@ Game.prototype.states.play.prototype.initParticles = function playInitParticles(
 
 Game.prototype.states.play.prototype.particleBurst = function playParticleBurst(position) {
     this.particleGroup.triggerPoolEmitter( 1, position );
+};
+
+Game.prototype.states.play.prototype.advanceCoin = function playAdvanceCoin(startCoin) {
+    startCoin.material.opacity = 1;
+    startCoin.mesh.capturable = true;
+
+    var nextCoin = startCoin.next;
+
+    if (nextCoin) {
+        for (var i = 4; i < 10; i++) {
+            nextCoin.material.opacity = 1 - ( i * 0.1 );
+
+            if (nextCoin.next) {
+                nextCoin = nextCoin.next;
+            }
+            else {
+                break;
+            }
+        }
+    }
 };
