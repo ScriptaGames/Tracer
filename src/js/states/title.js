@@ -67,6 +67,7 @@ Game.prototype.states.title.prototype.destroy = function (game) {
     console.log('[title.js] destroying title state');
 
     game.scene.remove(this.light);
+    game.removeMesh(this.titleText.mesh);
 
     // widen fov to see the full room
     game.camera.fov = 50;
