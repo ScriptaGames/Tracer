@@ -72,6 +72,7 @@ html, body {
 
 button {
     pointer-events: auto;
+    cursor: pointer;
 }
 
 .levelend {
@@ -116,3 +117,14 @@ button {
     border: none;
     outline: none;
 }
+
+.small-text {
+    font-size: 1.2rem;
+    /* user-select: auto; */
+    pointer-events: auto;
+}
+
+a { color: #8DD1FF; }
+a:hover { color: #8DD1FF; }
+a:active { color: #ffffff; }
+a:visited { color: #8DD1FF; }
