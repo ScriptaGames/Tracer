@@ -38,7 +38,6 @@ Game.prototype.states.levelend.prototype.update = function (game) {
         game.camera.position.x = Math.sin( this.rotation ) * this.distanceCenter;
         game.camera.position.z = Math.cos( this.rotation ) * this.distanceCenter;
 
-        console.log(game.camera.position.x, game.camera.position.z, this.distanceCenter)
     }
 
     game.camera.lookAt(new THREE.Vector3(1,1,1));
