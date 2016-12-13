@@ -48,6 +48,11 @@ Game.prototype.states.play = function (game, params) {
 
     this.initParticles();
 
+    // init sounds
+    this.burstSound = new Howl({
+        src: ['sounds/burst.wav'],
+        volume: 0.2,
+    });
 };
 
 Game.prototype.states.play.prototype.update = function (game) {
@@ -115,6 +120,8 @@ Game.prototype.states.play.prototype.checkRay = function playCheckRay(originPoin
         if (cmesh.capturable && !cmesh.captured) {
             cmesh.captured = true;
             var position = cmesh.position.clone();
+
+            this.burstSound.play();
 
             if (cmesh.coin.next) {
                 // Advance the capture state and opacity to the next coins
