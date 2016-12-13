@@ -57,7 +57,11 @@ Game.prototype.states.play.prototype.update = function (game) {
         this.playerPosition.position.add(this.playerVelocity);
 
         // move light
+        var cameraPosition = game.camera.position.clone();
+        cameraPosition.sub(this.playerPosition.position).normalize();
+        cameraPosition.multiplyScalar(20);
         this.light.position.copy(this.playerPosition.position);
+        this.light.position.add(cameraPosition);
 
         // move sphere
         this.sphere.position.copy(this.playerPosition.position);
