@@ -53,11 +53,12 @@ Game.prototype.states.title = function (game) {
     this.titleTextNextPoint = new THREE.Vector3();
 
     var textStartPoint = new THREE.Vector3(game.modelPoints.tracer2[0], game.modelPoints.tracer2[1], game.modelPoints.tracer2[2]);
-    this.titleText = new game.Trail(game, undefined, textStartPoint, 3);
+    this.titleText = new game.Trail(game, undefined, textStartPoint, 1);
     this.titleText.mesh.position.y = 580;
     this.titleText.mesh.position.z = -200;
-    this.titleText.mesh.position.x = -700;
+    this.titleText.mesh.position.x = -800;
     this.titleText.mesh.rotateX(Math.PI);
+    this.titleText.mesh.rotateY(Math.PI/14);
     game.scene.add(this.titleText.mesh);
 };
 
