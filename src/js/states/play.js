@@ -50,7 +50,7 @@ Game.prototype.states.play = function (game, params) {
 
     // init sounds
     this.burstSound = new Howl({
-        src: ['sounds/burst.wav'],
+        src: ['sounds/level_up.ogg'],
         volume: 0.2,
     });
 };
