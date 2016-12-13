@@ -145,14 +145,14 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
     this.coinBalance = 0;
     this.coinBudget = 0.6;
 
-    // game.scene.add(new game.Trail(game, modelPoints).mesh);
+    var posOne, coinOne;
 
     if (modelPoints.length > 3) {
 
-        var posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
+        posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
         var posTwo = new THREE.Vector3( modelPoints[3], modelPoints[4], modelPoints[5] );
 
-        var coinOne = this.addCoin(game, posOne, null);
+        coinOne = this.addCoin(game, posOne, null);
         var coinTwo = this.addCoin(game, posTwo, coinOne);
         coinOne.mesh.lookAt(coinTwo.mesh.position);
         coinOne.mesh.rotateX(Math.PI/2);
@@ -167,10 +167,9 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
             var prevCoin = this.coins[this.coins.length - 1];
 
             // if there are three points added so far, check
-            this.coinBalance += angle(point, prevPoint, prevPrevPoint);
+            this.coinBalance += Math.max(angle(point, prevPoint, prevPrevPoint), 0.1);
             if (this.coinBalance > this.coinBudget) {
-                var thisCoin = this.addCoin(game, point, prevCoin);
-                prevCoin.next = thisCoin;
+                prevCoin.next = this.addCoin(game, point, prevCoin);
                 console.log('[play.js] adding a coin');
                 this.coinBalance = 0;
             }
@@ -178,8 +177,8 @@ Game.prototype.states.play.prototype.placeCoins = function (game, modelPoints) {
     }
     else if (modelPoints.length === 3) {
         // just add one coin
-        var posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
-        var coinOne = this.addCoin(game, posOne, null);
+        posOne = new THREE.Vector3( modelPoints[0], modelPoints[1], modelPoints[2] );
+        coinOne = this.addCoin(game, posOne, null);
         coinOne.mesh.rotateX(Math.PI/2);
     }
 };
