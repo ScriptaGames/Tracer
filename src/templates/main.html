@@ -6,6 +6,29 @@
     <button fade-in-out on-click="play-free-draw" class="title-button free-draw-button"></button>
 </div>
 {{ /if }}
+{{ #if state === 'play' }}
+
+{{ #if stateParams.levelNum === 0 }}
+<div fade-in-out class="levelend">
+    <p> Center your mouse to fly straight.  Move it to steer.  See if you can hit the target.  </p>
+</div>
+{{ /if }}
+
+{{ #if stateParams.levelNum === 1 }}
+<div fade-in-out class="levelend">
+    <p> This level several targets.  Hit them in order; always go for the opaque one.  </p>
+    <p> Hold right mouse, or S, if you feel like stopping.</p>
+</div>
+{{ /if }}
+
+{{ #if stateParams.levelNum === 2 }}
+<div fade-in-out class="levelend">
+    <p> Now that you're a pro, have fun!  </p>
+</div>
+{{ /if }}
+
+{{ /if }}
+
 {{ #if state === 'levelend' }}
 <div fade-in-out class="levelend">
     <p>Level complete!  {{ congrats }}</p>
