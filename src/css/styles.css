@@ -115,7 +115,7 @@ button {
     bottom: 0;
 }
 .levelend button img {
-    width: 200px;
+    width: 120px;
 }
 .levelend button:hover {
     transform: scale(0.97, 0.97);
