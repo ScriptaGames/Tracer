@@ -19,7 +19,7 @@ Game.prototype.states.preload = function (game) {
     this.preloadModelPoints('models/empty.json'         , 'empty'     , 1);
 
     this.preloadModelPoints('models/tracer1.json'       , 'tracer1'   , 0.7);
-    this.preloadModelPoints('models/tracer2.json'       , 'tracer2'   , 0.7);
+    this.preloadModelPoints('models/tracer2.json'       , 'tracer2'   , 1.0);
     this.preloadModelPoints('models/happyface.json'     , 'happyface' , 1);
 
     this.preloadTexture('textures/stroke.png', 'trailStroke');

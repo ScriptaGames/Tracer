@@ -46,21 +46,35 @@ Game.prototype.states.title = function (game) {
 
     // trace name of game
     // copy the name's typed array and set all points to first point
-    this.titleTextPoints = game.modelPoints.tracer2.slice();
-    for (var i = 3; i < this.titleTextPoints.length; i+=3) {
-        this.titleTextPoints[i  ] = this.titleTextPoints[0];
-        this.titleTextPoints[i+1] = this.titleTextPoints[1];
-        this.titleTextPoints[i+2] = this.titleTextPoints[2];
-    }
-    this.titleText = new game.Trail(game, game.modelPoints.tracer2, new THREE.Vector3(), 4);
-    this.titleText.mesh.geometry.center();
-    this.titleText.mesh.position.y += 170;
+    this.titleTextFake = new game.Trail(game, game.modelPoints.tracer2, new THREE.Vector3());
+    this.titleTextFake.mesh.geometry.center();
+
+    this.titleTextIndex = 0;
+    this.titleTextNextPoint = new THREE.Vector3();
+
+    var textStartPoint = new THREE.Vector3(game.modelPoints.tracer2[0], game.modelPoints.tracer2[1], game.modelPoints.tracer2[2]);
+    this.titleText = new game.Trail(game, undefined, textStartPoint, 3);
+    this.titleText.mesh.position.y = 580;
+    this.titleText.mesh.position.z = -200;
+    this.titleText.mesh.position.x = -700;
     this.titleText.mesh.rotateX(Math.PI);
     game.scene.add(this.titleText.mesh);
 };
 
 Game.prototype.states.title.prototype.update = function (game) {
+    this.updateTitle();
+    this.updateTitle();
+    this.updateTitle();
+    this.updateTitle();
+    this.updateTitle();
+    this.updateTitle();
     // game.setState('play');
+};
+
+Game.prototype.states.title.prototype.updateTitle = function () {
+    this.titleTextIndex += 3;
+    this.titleTextNextPoint.set(this.titleTextFake.meshLine.positions[this.titleTextIndex], this.titleTextFake.meshLine.positions[this.titleTextIndex+1], this.titleTextFake.meshLine.positions[this.titleTextIndex+2] );
+    this.titleText.meshLine.advance(this.titleTextNextPoint);
 };
 
 Game.prototype.states.title.prototype.destroy = function (game) {
