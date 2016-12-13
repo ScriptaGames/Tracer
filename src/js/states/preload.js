@@ -9,14 +9,18 @@ Game.prototype.states.preload = function (game) {
     this.textureLoader = new THREE.TextureLoader();
     this.jsonLoader = new THREE.JSONLoader();
 
-    this.preloadModelPoints('models/monkey.json'        , 'level6' , 5);
-    this.preloadModelPoints('models/LeePerrySmith.json' , 'level5' , 5);
-    this.preloadModelPoints('models/football.json'      , 'level4' , 5);
-    this.preloadModelPoints('models/cube.json'          , 'level3' , 6);
-    this.preloadModelPoints('models/cone.json'          , 'level2' , 6);
-    this.preloadModelPoints('models/line.json'          , 'level1' , 9);
-    this.preloadModelPoints('models/onepoint.json'      , 'level0' , 1);
-    this.preloadModelPoints('models/empty.json'          , 'empty'   , 1);
+    this.preloadModelPoints('models/monkey.json'        , 'level6'    , 5);
+    this.preloadModelPoints('models/LeePerrySmith.json' , 'level5'    , 5);
+    this.preloadModelPoints('models/football.json'      , 'level4'    , 5);
+    this.preloadModelPoints('models/cube.json'          , 'level3'    , 6);
+    this.preloadModelPoints('models/cone.json'          , 'level2'    , 6);
+    this.preloadModelPoints('models/line.json'          , 'level1'    , 9);
+    this.preloadModelPoints('models/onepoint.json'      , 'level0'    , 1);
+    this.preloadModelPoints('models/empty.json'         , 'empty'     , 1);
+
+    this.preloadModelPoints('models/tracer1.json'       , 'tracer1'   , 0.7);
+    this.preloadModelPoints('models/tracer2.json'       , 'tracer2'   , 0.7);
+    this.preloadModelPoints('models/happyface.json'     , 'happyface' , 1);
 
     this.preloadTexture('textures/stroke.png', 'trailStroke');
     this.preloadTexture('textures/wall.jpg', 'wallTexture');

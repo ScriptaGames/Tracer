@@ -43,6 +43,20 @@ Game.prototype.states.title = function (game) {
     game.scene.add(ambientLight);
     this.light = game.light;
     game.scene.add(this.light);
+
+    // trace name of game
+    // copy the name's typed array and set all points to first point
+    this.titleTextPoints = game.modelPoints.tracer2.slice();
+    for (var i = 3; i < this.titleTextPoints.length; i+=3) {
+        this.titleTextPoints[i  ] = this.titleTextPoints[0];
+        this.titleTextPoints[i+1] = this.titleTextPoints[1];
+        this.titleTextPoints[i+2] = this.titleTextPoints[2];
+    }
+    this.titleText = new game.Trail(game, game.modelPoints.tracer2, new THREE.Vector3(), 4);
+    this.titleText.mesh.geometry.center();
+    this.titleText.mesh.position.y += 170;
+    this.titleText.mesh.rotateX(Math.PI);
+    game.scene.add(this.titleText.mesh);
 };
 
 Game.prototype.states.title.prototype.update = function (game) {

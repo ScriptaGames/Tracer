@@ -1,4 +1,4 @@
-Game.prototype.Trail = function (game, points, origin) {
+Game.prototype.Trail = function (game, points, origin, width) {
     this.game = game;
     this.origin = origin ? origin.clone() : new THREE.Vector3(1);
     this.length = points ? points.length/3 : 18000;
@@ -13,7 +13,7 @@ Game.prototype.Trail = function (game, points, origin) {
         // resolution: new THREE.Vector2( window.innerWidth, window.innerHeight ),
         resolution: new THREE.Vector2(0.2, 1),
         sizeAttenuation: 1,
-        lineWidth: 0.5,
+        lineWidth: width || 0.5,
         near: game.camera.near,
         far: game.camera.far,
         depthTest: true,
