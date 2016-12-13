@@ -76,7 +76,7 @@ button {
 }
 
 .levelend {
-    width: 75%;
+    width: 100%;
     text-align: center;
     margin: 0 auto;
 
@@ -103,6 +103,16 @@ button {
     font-size: 2rem;
     font-weight: bold;
     /* text-shadow: -1px 0 #00CDFC, 0 1px #00CDFC, 1px 0 #00CDFC, 0 -1px #00CDFC; */
+}
+.levelend button.replay-btn {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.levelend button.next-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 .levelend button img {
     width: 200px;
