@@ -10,6 +10,7 @@ Game.prototype.states.levelend = function (game, params) {
     this.rotation = 0;
 
     this.lerpPct = 0.03;
+    this.zoomOutVector = new THREE.Vector3(0, 100, 500);
 
     params.playState.light.position.set(1, 1, 1);
 
@@ -24,8 +25,8 @@ Game.prototype.states.levelend.prototype.update = function (game) {
 
     game.camera.up.set( lerp(game.camera.up.x, 0, this.lerpPct), lerp(game.camera.up.y, 1, this.lerpPct), lerp(game.camera.up.z, 0, this.lerpPct));
 
-    if (!this.zoomout_complete && (Math.round(game.camera.position.y) != 100 || Math.round(game.camera.position.z) != 400)) {
-        game.camera.position.set( lerp(game.camera.position.x, 0, this.lerpPct), lerp(game.camera.position.y, 100, this.lerpPct), lerp(game.camera.position.z, 400, this.lerpPct) );
+    if (!this.zoomout_complete && (Math.round(game.camera.position.y) != this.zoomOutVector.y || Math.round(game.camera.position.z) != this.zoomOutVector.z)) {
+        game.camera.position.set( lerp(game.camera.position.x, this.zoomOutVector.x, this.lerpPct), lerp(game.camera.position.y, this.zoomOutVector.y, this.lerpPct), lerp(game.camera.position.z, this.zoomOutVector.z, this.lerpPct) );
     }
     else {
         if (!this.zoomout_complete) {
