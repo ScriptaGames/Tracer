@@ -63,13 +63,9 @@ Game.prototype.states.title = function (game) {
 };
 
 Game.prototype.states.title.prototype.update = function (game) {
-    this.updateTitle();
-    this.updateTitle();
-    this.updateTitle();
-    this.updateTitle();
-    this.updateTitle();
-    this.updateTitle();
-    // game.setState('play');
+    for (var i = 0; i < 16; i++) {
+        this.updateTitle();
+    }
 };
 
 Game.prototype.states.title.prototype.updateTitle = function () {
