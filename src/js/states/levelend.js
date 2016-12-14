@@ -9,7 +9,7 @@ Game.prototype.states.levelend = function (game, params) {
 
     this.rotation = 0;
 
-    this.lerpPct = 0.05;
+    this.lerpPct = 0.04;
     this.zoomOutVector = new THREE.Vector3(0, 100, 500);
 
     params.playState.light.position.set(1, 1, 1);
