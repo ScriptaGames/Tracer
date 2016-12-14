@@ -70,8 +70,10 @@ Game.prototype.states.title.prototype.update = function (game) {
 
 Game.prototype.states.title.prototype.updateTitle = function () {
     this.titleTextIndex += 3;
-    this.titleTextNextPoint.set(this.titleTextFake.meshLine.positions[this.titleTextIndex], this.titleTextFake.meshLine.positions[this.titleTextIndex+1], this.titleTextFake.meshLine.positions[this.titleTextIndex+2] );
-    this.titleText.meshLine.advance(this.titleTextNextPoint);
+    if (this.titleTextFake.meshLine.positions[this.titleTextIndex]) {
+        this.titleTextNextPoint.set(this.titleTextFake.meshLine.positions[this.titleTextIndex], this.titleTextFake.meshLine.positions[this.titleTextIndex+1], this.titleTextFake.meshLine.positions[this.titleTextIndex+2] );
+        this.titleText.meshLine.advance(this.titleTextNextPoint);
+    }
 };
 
 Game.prototype.states.title.prototype.destroy = function (game) {
