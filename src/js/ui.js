@@ -1,8 +1,8 @@
 Game.UI = function () {
     this.engine = new Ractive({
         el: '.ui-container',
-        data: ,
-        template: '
+        data: undefined,
+        template: undefined,
     });
 };
 
