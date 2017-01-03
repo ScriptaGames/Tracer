@@ -1,6 +1,10 @@
 # Tracer
 
-A game for Ludum Dare 37.
+A web game. Connect the dots in 3D. Built in 72 hours for Ludum Dare 37.
+
+[Play now!](http://scripta.co/tracer/)
+
+![title screenshot](title.jpg)
 
 ## Setup
 
